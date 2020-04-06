@@ -19,9 +19,7 @@
   "dependencies": {
     "express": "^4.17.1"
   },
-  "devDependencies": {},
   "scripts": {
-    "build": "cd client && npm install && npm run build",
-    "start": "node server"
+    "start": "node source/index.js"
   }
 }
