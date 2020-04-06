@@ -1,8 +1,28 @@
-import React from "react";
+import ApolloClient, { gql } from "apollo-boost";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  useEffect(() => {
+    const client = new ApolloClient({
+      uri: "https://cartuna-database.herokuapp.com/v1/graphql",
+    });
+
+    client
+      .query({
+        query: gql`
+          {
+            profile {
+              id
+              name
+            }
+          }
+        `,
+      })
+      .then((result) => console.log(result));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
