@@ -11,6 +11,11 @@
   "bugs": {
     "url": "https://github.com/NintendoBen/cartuna/issues"
   },
+  "engines": {
+    "node": "12.16.x",
+    "npm": "6.14.x",
+    "yarn": "1.13.x"
+  },
   "dependencies": {
     "express": "^4.17.1"
   },
