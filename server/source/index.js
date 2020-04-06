@@ -1,18 +1,10 @@
-const { ApolloServer, gql } = require("apollo-server-express");
-const fetch = require("node-fetch");
-
 const express = require("express");
 const path = require("path");
 const cluster = require("cluster");
 const numCPUs = require("os").cpus().length;
 
-const graphqlHTTP = require("express-graphql");
-const schema = require("./schema");
-
 const isDev = process.env.NODE_ENV !== "production";
 const PORT = process.env.PORT || 5000;
-const CARTUNA_DATABASE_URL =
-  "https://cartuna-database.herokuapp.com/v1/graphql";
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
@@ -29,46 +21,20 @@ if (!isDev && cluster.isMaster) {
     );
   });
 } else {
-  const typeDefs = gql`
-    type Profile {
-      id: Int
-      name: String
-    }
-
-    type Query {
-      profile: [Profile]
-    }
-  `;
-
-  const resolvers = {
-    Query: {
-      profile: async (_root, { query }) => {
-        try {
-          const results = await fetch(CARTUNA_DATABASE_URL, {
-            method: "POST",
-            headers: {
-              ["x-hasura-admin-secret"]: "6vcPQ77AfRqYteCK59SPXHz4j2M8JtRS",
-            },
-            body: { query },
-          });
-          const json = await results.json();
-
-          return json;
-        } catch (e) {
-          console.error(e);
-        }
-      },
-    },
-  };
-
+  console.log("OMG");
   const app = express();
-
-  const server = new ApolloServer({ typeDefs, resolvers });
-  server.applyMiddleware({ app });
 
   app.use(express.static(path.resolve(__dirname, "../../client/build")));
 
-  app.get("auth", function (request, response) {
+  app.get("/auth", function (request, response) {
+    console.log("cartuna - auth:");
+
+    var origin = request.headers.host;
+    var params = JSON.stringify(request.query);
+
+    console.log("- origin: " + origin);
+    console.log("- params: " + params);
+
     var hasuraVariables = {
       "X-Hasura-Role": "user",
       "X-Hasura-User-Id": "1",
