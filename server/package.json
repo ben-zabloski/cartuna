@@ -3,6 +3,7 @@
   "author": "Ben Zabloski",
   "version": "1.0.0",
   "license": "ISC",
+  "private": true,
   "homepage": "https://github.com/NintendoBen/cartuna#readme",
   "repository": {
     "type": "git",
@@ -13,21 +14,10 @@
   },
   "engines": {
     "node": "12.16.x",
-    "npm": "6.14.x",
-    "yarn": "1.13.x"
+    "npm": "6.14.x"
   },
   "dependencies": {
-    "apollo-datasource": "^0.7.0",
-    "apollo-datasource-rest": "^0.8.0",
-    "apollo-server": "^2.11.0",
-    "apollo-server-express": "^2.11.0",
-    "apollo-server-testing": "^2.11.0",
-    "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
-    "graphql": "^15.0.0",
-    "node-fetch": "^2.6.0",
-    "sequelize": "^5.21.6",
-    "sqlite3": "^4.1.1"
+    "express": "^4.17.1"
   },
   "scripts": {
     "start": "node source/index.js"

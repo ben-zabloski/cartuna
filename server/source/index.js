@@ -21,34 +21,13 @@ if (!isDev && cluster.isMaster) {
     );
   });
 } else {
-  console.log("OMG");
   const app = express();
-
   app.use(express.static(path.resolve(__dirname, "../../client/build")));
-
-  app.get("/auth", function (request, response) {
-    console.log("cartuna - auth:");
-
-    var origin = request.headers.host;
-    var params = JSON.stringify(request.query);
-
-    console.log("- origin: " + origin);
-    console.log("- params: " + params);
-
-    var hasuraVariables = {
-      "X-Hasura-Role": "anonymous",
-      "X-Hasura-User-Id": "1",
-    };
-
-    response.json(hasuraVariables);
-  });
-
   app.get("*", function (request, response) {
     response.sendFile(
       path.resolve(__dirname, "../../client/build", "index.html")
     );
   });
-
   app.listen(PORT, function () {
     console.error(
       `Node ${
