@@ -36,7 +36,7 @@ if (!isDev && cluster.isMaster) {
     console.log("- params: " + params);
 
     var hasuraVariables = {
-      "X-Hasura-Role": "user",
+      "X-Hasura-Role": "anonymous",
       "X-Hasura-User-Id": "1",
     };
 
