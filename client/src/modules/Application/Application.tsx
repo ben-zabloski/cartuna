@@ -1,40 +1,49 @@
-import ApolloClient, { gql } from "apollo-boost";
-import React, { useEffect, useState, Profiler } from "react";
+import ApolloClient from "apollo-boost";
+import React, { useEffect, useReducer, useState } from "react";
+import {
+  getSeriesByNameRequest,
+  getSeriesByNameResponse,
+} from "./ApplicationActionCreators";
+import { GET_SERIES_BY_NAME } from "./ApplicationQueries";
+import applicationReducer from "./ApplicationReducer";
+import Input from "../Input/Input";
 import "./Application.css";
 
-type Profile = {
-  id: number;
-  name: string;
-};
+const client = new ApolloClient({
+  uri: "https://cartuna-database.herokuapp.com/v1/graphql",
+});
 
 function Application() {
-  const [state, setState] = useState<Array<Profile> | null>(null);
+  const [{ series }, dispatch] = useReducer(applicationReducer, {
+    loading: false,
+    error: false,
+    series: [],
+  });
+
+  const [input, setInput] = useState("");
 
   useEffect(() => {
-    const client = new ApolloClient({
-      uri: "https://cartuna-database.herokuapp.com/v1/graphql",
-    });
+    //dispatch(getSeriesByNameRequest(input));
 
     client
       .query({
-        query: gql`
-          {
-            profile {
-              id
-              name
-            }
-          }
-        `,
+        query: GET_SERIES_BY_NAME,
+        variables: { name: input },
       })
-      .then((result) => setState(result.data.profile));
-  }, []);
+      .then((result) => {
+        dispatch(getSeriesByNameResponse(result.data.getSeriesByName, null));
+      });
+  }, [input]);
 
   return (
     <div className="Application">
       <p>Cartuna</p>
+      <Input onChange={(value) => setInput(value)} debounce={2000} />
       <div>
-        {state &&
-          state.map((profile) => <div key={profile.id}>{profile.name}</div>)}
+        {series &&
+          series.map((series) => (
+            <div key={series.id}>{series.seriesName}</div>
+          ))}
       </div>
     </div>
   );
