@@ -1,16 +1,15 @@
 .Application {
   align-items: center;
-  background-color: #282c34;
-  color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin: auto;
   min-height: 100vh;
 }
 
 .ApplicationHeader {
   display: flex;
   align-items: center;
+  margin: 24px;
 }
 
 .ApplicationTitle {
@@ -19,4 +18,47 @@
 
 .ApplicationInput {
   margin: 24px;
+  padding-bottom: 6px;
+}
+
+@media only screen and (min-width: 0px) {
+  .Application {
+    width: 240px;
+  }
+
+  .ApplicationHeader {
+    flex-direction: column;
+    margin: 24px 24px 0px 24px;
+  }
+
+  .ApplicationInput {
+    margin: 24px 24px 12px 24px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .Application {
+    width: 480px;
+  }
+
+  .ApplicationHeader {
+    flex-direction: row;
+    margin: 24px;
+  }
+
+  .ApplicationInput {
+    margin: 24px;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .Application {
+    width: 720px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .Application {
+    width: 960px;
+  }
 }
