@@ -1,16 +1,13 @@
 import ApolloClient from "apollo-boost";
 import React, { useEffect, useReducer, useState } from "react";
-import {
-  getSeriesByNameRequest,
-  getSeriesByNameResponse,
-} from "./ApplicationActionCreators";
+import { getSeriesByNameResponse } from "./ApplicationActionCreators";
 import { GET_SERIES_BY_NAME } from "./ApplicationQueries";
 import applicationReducer from "./ApplicationReducer";
 import Input from "../Input/Input";
 import "./Application.css";
 
 const client = new ApolloClient({
-  uri: "https://cartuna-database.herokuapp.com/v1/graphql",
+  uri: process.env.REACT_APP_DATABASE_URL,
 });
 
 function Application() {
@@ -23,8 +20,6 @@ function Application() {
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    //dispatch(getSeriesByNameRequest(input));
-
     client
       .query({
         query: GET_SERIES_BY_NAME,
