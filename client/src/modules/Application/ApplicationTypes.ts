@@ -11,5 +11,10 @@ export type Action =
   | GetSeriesByNameRequest
   | GetSeriesByNameResponse;
 
-export type Series = { id: string; seriesName: string };
+export type Series = {
+  banner: string;
+  id: string;
+  image: string;
+  seriesName: string;
+};
 export type State = { loading: boolean; error: boolean; series: Array<Series> };

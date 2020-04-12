@@ -1,0 +1,30 @@
+.CardList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+@media only screen and (min-width: 0px) {
+  .CardList {
+    width: 240px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .CardList {
+    width: 480px;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .CardList {
+    width: 720px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .CardList {
+    width: 960px;
+  }
+}
