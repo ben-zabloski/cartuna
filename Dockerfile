@@ -1,5 +1,8 @@
 FROM node:12
 
+ARG REACT_APP_DATABASE_URL=https://cartuna-database.herokuapp.com/v1/graphql/
+ARG REACT_APP_THE_TV_DB_BASE_URL=https://www.thetvdb.com
+
 WORKDIR /usr/src/app
 RUN mkdir client && mkdir server
 
