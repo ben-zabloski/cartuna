@@ -3,7 +3,7 @@ import {
   GetSeriesByIDResponse,
   GetSeriesByNameRequest,
   GetSeriesByNameResponse,
-} from "./ApplicationActions";
+} from "./HomeActions";
 
 export type Action =
   | GetSeriesByIDRequest

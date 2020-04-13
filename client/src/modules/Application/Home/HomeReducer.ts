@@ -3,14 +3,11 @@ import {
   GET_SERIES_BY_ID_RESPONSE,
   GET_SERIES_BY_NAME_REQUEST,
   GET_SERIES_BY_NAME_RESPONSE,
-} from "./ApplicationActions";
+} from "./HomeActions";
 
-import { Action, State } from "./ApplicationTypes";
+import { Action, State } from "./HomeTypes";
 
-export default function applicationReducer(
-  state: State,
-  action: Action
-): State {
+export function homeReducer(state: State, action: Action): State {
   switch (action.type) {
     case GET_SERIES_BY_ID_REQUEST:
       return state;

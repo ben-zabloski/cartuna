@@ -1,4 +1,4 @@
-import { Series } from "./ApplicationTypes";
+import { Series } from "./HomeTypes";
 
 export const GET_SERIES_BY_ID_REQUEST = "GET_SERIES_BY_ID_REQUEST";
 export const GET_SERIES_BY_ID_RESPONSE = "GET_SERIES_BY_ID_RESPONSE";

@@ -3,16 +3,16 @@ import {
   GET_SERIES_BY_ID_RESPONSE,
   GET_SERIES_BY_NAME_REQUEST,
   GET_SERIES_BY_NAME_RESPONSE,
-} from "./ApplicationActions";
+} from "./HomeActions";
 
 import {
   GetSeriesByIDRequest,
   GetSeriesByIDResponse,
   GetSeriesByNameRequest,
   GetSeriesByNameResponse,
-} from "./ApplicationActions";
+} from "./HomeActions";
 
-import { Series } from "./ApplicationTypes";
+import { Series } from "./HomeTypes";
 
 export function getSeriesByIDRequest(id: string): GetSeriesByIDRequest {
   return {
