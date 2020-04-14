@@ -1,0 +1,47 @@
+.HomeCardList {
+  perspective: 1000px;
+  position: relative;
+  width: 100%;
+}
+
+.CardListTest {
+  position: absolute;
+  -webkit-transform-origin-y: 3000px;
+}
+
+.spinnerContainer {
+  flex-shrink: 0;
+  flex-basis: 50px;
+  position: relative;
+}
+
+.spinner {
+  opacity: 1;
+  transition: opacity linear 0.1s;
+}
+
+.spinner::before {
+  animation: 2s linear infinite spinner;
+  border: solid 3px #eee;
+  border-bottom-color: #0066cc;
+  border-radius: 50%;
+  content: "";
+  height: 25px;
+  left: 50%;
+  opacity: inherit;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center;
+  width: 25px;
+  will-change: transform;
+}
+
+@keyframes spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}

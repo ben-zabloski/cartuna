@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./Input.css";
 
 function useDebounce(value: any, delay: number = 500) {
@@ -23,18 +23,28 @@ interface Props {
 }
 
 function Input({ debounce, onChange }: Props) {
+  const initializedRef = useRef(false);
   const [input, setInput] = useState("");
+
+  const inputOnChangeHandler = useCallback((event) => {
+    setInput(event.target.value);
+  }, []);
 
   const debouncedValue = useDebounce(input, debounce);
 
   useEffect(() => {
+    if (initializedRef.current === false) {
+      initializedRef.current = true;
+      return;
+    }
+
     onChange(debouncedValue);
   }, [debouncedValue, onChange]);
 
   return (
     <input
       className="Input"
-      onChange={(event) => setInput(event.target.value)}
+      onChange={inputOnChangeHandler}
       type="text"
       value={input}
     />
