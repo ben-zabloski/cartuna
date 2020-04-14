@@ -8,6 +8,7 @@ RUN mkdir client && mkdir server
 
 WORKDIR /usr/src/app/client
 COPY ./client/package*.json ./
+COPY ./client/tsconfig.json ./
 RUN npm install
 COPY ./client/src ./src/
 COPY ./client/public ./public/
