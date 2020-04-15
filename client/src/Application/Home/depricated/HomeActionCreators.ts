@@ -12,7 +12,7 @@ import {
   GetSeriesByNameResponse,
 } from "./HomeActions";
 
-import { Series } from "./HomeTypes";
+import { SeriesSearch } from "../HomeTypes";
 
 export function getSeriesByIDRequest(id: string): GetSeriesByIDRequest {
   return {
@@ -22,7 +22,7 @@ export function getSeriesByIDRequest(id: string): GetSeriesByIDRequest {
 }
 
 export function getSeriesByIDResponse(
-  result: Series,
+  result: SeriesSearch,
   error: object | null
 ): GetSeriesByIDResponse {
   return {
@@ -40,7 +40,7 @@ export function getSeriesByNameRequest(name: string): GetSeriesByNameRequest {
 }
 
 export function getSeriesByNameResponse(
-  result: Array<Series>,
+  result: Array<SeriesSearch>,
   error: object | null
 ): GetSeriesByNameResponse {
   return {

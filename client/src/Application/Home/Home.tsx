@@ -3,14 +3,13 @@ import { RouteComponentProps } from "@reach/router";
 import React, { useEffect, useState, useCallback } from "react";
 import { animated, config, useSpring, useTransition } from "react-spring";
 
-import CardList from "modules/CardList/CardList";
-import LoadingCard from "modules/LoadingCard/LoadingCard";
-import SeriesCard from "modules/SeriesCard/SeriesCard";
-import Input from "modules/Input/Input";
+import CardList from "./CardList/CardList";
+import SeriesCard from "./SeriesCard/SeriesCard";
+import Input from "./Input/Input";
 
 import cartunaLogo from "./images/cartuna192.png";
 import { GET_SERIES_BY_NAME } from "./HomeQueries";
-import { Series } from "./HomeTypes";
+import { SeriesSearch } from "./HomeTypes";
 
 import "./Home.css";
 
@@ -18,7 +17,7 @@ const INPUT_DEBOUNCE = 2000;
 const DEFAULT_OPTIONS = { skip: true, variables: { name: "" } };
 
 type DataObject = {
-  getSeriesByName: [Series];
+  getSeriesByName: [SeriesSearch];
 };
 
 type DataMap = Record<string, DataObject>;
@@ -94,7 +93,7 @@ function Home(props: RouteComponentProps) {
                 dataMap[item] &&
                 dataMap[item] &&
                 dataMap[item].getSeriesByName &&
-                dataMap[item].getSeriesByName.map((series: Series) => (
+                dataMap[item].getSeriesByName.map((series: SeriesSearch) => (
                   <SeriesCard key={series.id} {...series} />
                 ))}
             </CardList>

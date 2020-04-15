@@ -1,4 +1,4 @@
-import { Series } from "./HomeTypes";
+import { SeriesSearch } from "../HomeTypes";
 
 export const GET_SERIES_BY_ID_REQUEST = "GET_SERIES_BY_ID_REQUEST";
 export const GET_SERIES_BY_ID_RESPONSE = "GET_SERIES_BY_ID_RESPONSE";
@@ -12,7 +12,7 @@ export interface GetSeriesByIDRequest {
 
 export interface GetSeriesByIDResponse {
   type: typeof GET_SERIES_BY_ID_RESPONSE;
-  result: Series;
+  result: SeriesSearch;
   error: object | null;
 }
 
@@ -23,6 +23,6 @@ export interface GetSeriesByNameRequest {
 
 export interface GetSeriesByNameResponse {
   type: typeof GET_SERIES_BY_NAME_RESPONSE;
-  result: Array<Series>;
+  result: Array<SeriesSearch>;
   error: object | null;
 }

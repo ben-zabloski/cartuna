@@ -17,4 +17,5 @@ export type Series = {
   image: string;
   seriesName: string;
 };
+
 export type State = { loading: boolean; error: boolean; series: Array<Series> };

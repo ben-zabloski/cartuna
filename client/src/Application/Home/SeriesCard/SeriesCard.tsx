@@ -1,9 +1,9 @@
 import { Link } from "@reach/router";
 import React from "react";
-import { Series } from "../Application/Home/HomeTypes";
+import { SeriesSearch } from "../HomeTypes";
 import "./SeriesCard.css";
 
-function SeriesCard(props: Series) {
+function SeriesCard(props: SeriesSearch) {
   return (
     <div className="SeriesCard">
       <Link to={`/series/${props.id}`}>
