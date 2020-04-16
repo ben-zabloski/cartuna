@@ -19,12 +19,13 @@ function useDebounce(value: any, delay: number = 500) {
 
 interface Props {
   debounce: number;
+  defaultValue: string;
   onChange: (value: string) => void;
 }
 
-function Input({ debounce, onChange }: Props) {
+function Input({ debounce, defaultValue, onChange }: Props) {
   const initializedRef = useRef(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(defaultValue);
 
   const inputOnChangeHandler = useCallback((event) => {
     setInput(event.target.value);

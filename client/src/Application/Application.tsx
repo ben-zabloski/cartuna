@@ -16,7 +16,7 @@ function Application() {
     <ApolloProvider client={client}>
       <Suspense fallback={<div></div>}>
         <Router className="Application">
-          <HomeLoader path="/" />
+          <HomeLoader path="/*term" />
           <SeriesLoader path="/series/:seriesID" />
         </Router>
       </Suspense>
