@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { RouteComponentProps } from "@reach/router";
 import React, { useEffect, useState, useCallback } from "react";
-import { animated, config, useSpring, useTransition } from "react-spring";
+import { animated, config, useTransition } from "react-spring";
 
 import CardList from "./CardList/CardList";
 import SeriesCard from "./SeriesCard/SeriesCard";
@@ -10,6 +10,7 @@ import Input from "./Input/Input";
 import cartunaLogo from "./images/cartuna192.png";
 import { GET_SERIES_BY_NAME } from "./HomeQueries";
 import { SeriesSearch } from "./HomeTypes";
+import Spinner from "../Spinner/Spinner";
 
 import "./Home.css";
 
@@ -55,8 +56,6 @@ function Home(props: RouteComponentProps) {
     setLoading(false);
   }, [data]);
 
-  const loadingSpring = useSpring({ opacity: loading ? 1 : 0 });
-
   const transitions = useTransition(dataCards, null, {
     from: { opacity: 1, transform: "rotateX(-30deg)" },
     enter: { delay: 0, opacity: 1, transform: "rotateX(0deg)" },
@@ -78,9 +77,7 @@ function Home(props: RouteComponentProps) {
               />
             </div>
             <div className="spinnerContainer">
-              <animated.div style={loadingSpring}>
-                <div className="spinner" />
-              </animated.div>
+              <Spinner show={loading} />
             </div>
           </div>
         </div>

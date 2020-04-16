@@ -1,0 +1,25 @@
+.Spinner {
+  animation: 2s linear infinite Spinner;
+  border: solid 3px #eee;
+  border-bottom-color: #0066cc;
+  border-radius: 50%;
+  content: "";
+  height: 24px;
+  left: 50%;
+  opacity: inherit;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center;
+  width: 24px;
+  will-change: transform;
+}
+
+@keyframes Spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
