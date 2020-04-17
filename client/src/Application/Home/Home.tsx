@@ -4,6 +4,7 @@ import {
   useNavigate,
   useParams,
   useLocation,
+  useMatch,
 } from "@reach/router";
 import React, { useEffect, useState, useCallback } from "react";
 import { animated, config, useTransition } from "react-spring";
@@ -29,8 +30,9 @@ function Home(props: RouteComponentProps) {
   const apolloClient = useApolloClient();
   const location = useLocation();
   const navigate = useNavigate();
-  const params = useParams();
-  const term = params.term;
+  // const params = useParams();
+  const match = useMatch("/search/:term");
+  const term = match?.term || "";
 
   const [input, setInput] = useState(term);
   const inputOnChangeHandler = useCallback((value) => setInput(value), []);
@@ -44,10 +46,14 @@ function Home(props: RouteComponentProps) {
   useEffect(() => {
     if (location.pathname === `/${input}`) return;
 
-    navigate(`/${input}`);
-  }, [input, location.pathname, navigate]);
+    console.log("navigate:", input);
+
+    navigate(`/search/${input}`);
+  }, [input]);
 
   useEffect(() => {
+    if (!term) return;
+
     queryCache[variables.name] = data;
 
     setCards([term]);

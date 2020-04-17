@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { RouteComponentProps, useParams } from "@reach/router";
+import { RouteComponentProps, useMatch } from "@reach/router";
 import React from "react";
 
 import { GET_SERIES_BY_ID } from "./SeriesQueries";
@@ -11,10 +11,11 @@ type DataObject = {
 };
 
 function Series(props: RouteComponentProps) {
-  const params = useParams();
+  const match = useMatch("/series/:seriesID");
+
   const { data } = useQuery(GET_SERIES_BY_ID, {
     variables: {
-      id: params.seriesID,
+      id: match?.seriesID,
     },
   });
 
