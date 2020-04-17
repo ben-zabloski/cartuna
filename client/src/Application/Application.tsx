@@ -31,8 +31,6 @@ function ApplicationRoutes(props: RouteComponentProps) {
 
   const path = homeMatch?.path || seriesMatch?.path;
 
-  console.log("path:", path);
-
   const transitions = useTransition(path, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
