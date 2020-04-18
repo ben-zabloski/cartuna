@@ -1,4 +1,4 @@
-import { Link } from "@reach/router";
+import Link from "../../../Router/Link";
 import React from "react";
 import { SeriesSearch } from "../HomeTypes";
 import "./SeriesCard.css";
@@ -6,7 +6,7 @@ import "./SeriesCard.css";
 function SeriesCard(props: SeriesSearch) {
   return (
     <div className="SeriesCard">
-      <Link to={`/series/${props.id}`}>
+      <Link href={`/series/${props.id}`}>
         <img
           alt={props.seriesName}
           className="SeriesCardImage"

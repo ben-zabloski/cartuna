@@ -1,12 +1,5 @@
 import { useApolloClient, useQuery } from "@apollo/react-hooks";
-import {
-  RouteComponentProps,
-  useNavigate,
-  useParams,
-  useLocation,
-  useMatch,
-} from "@reach/router";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { animated, config, useTransition } from "react-spring";
 
 import CardList from "./CardList/CardList";
@@ -17,6 +10,7 @@ import cartunaLogo from "./images/cartuna192.png";
 import { GET_SERIES_BY_NAME } from "./HomeQueries";
 import { SeriesSearch } from "./HomeTypes";
 import Spinner from "../Spinner/Spinner";
+import useRoute from "../../Router/useRoute";
 import "./Home.css";
 
 type DataObject = { getSeriesByName: [SeriesSearch] };
@@ -26,16 +20,20 @@ const INPUT_DEBOUNCE = 500;
 
 const queryCache: DataMap = {};
 
-function Home(props: RouteComponentProps) {
+function Home() {
   const apolloClient = useApolloClient();
-  const location = useLocation();
-  const navigate = useNavigate();
-  // const params = useParams();
-  const match = useMatch("/search/:term");
-  const term = match?.term || "";
+  console.log("apolloClient:", apolloClient);
 
-  const [input, setInput] = useState(term);
-  const inputOnChangeHandler = useCallback((value) => setInput(value), []);
+  const mounted = useRef(false);
+  const route = useRoute("/:term");
+  const term = route?.params.term || "";
+
+  console.log("Home route:", route);
+
+  const [input, setInput] = useState("");
+  const inputOnChangeHandler = useCallback((value) => {
+    setInput(value);
+  }, []);
 
   const [cards, setCards] = useState<Array<string>>([]);
 
@@ -44,11 +42,18 @@ function Home(props: RouteComponentProps) {
   });
 
   useEffect(() => {
-    if (location.pathname === `/${input}`) return;
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    // if (match?.path === `/${input}`) return;
 
     console.log("navigate:", input);
 
-    navigate(`/search/${input}`);
+    route?.pushState(null, "", `/${input}`);
+
+    //TODO: Figure out if we can improve our hooks usage...
+    // eslint-disable-next-line
   }, [input]);
 
   useEffect(() => {
@@ -57,6 +62,9 @@ function Home(props: RouteComponentProps) {
     queryCache[variables.name] = data;
 
     setCards([term]);
+
+    //TODO: Figure out if we can improve our hooks usage...
+    // eslint-disable-next-line
   }, [data]);
 
   const transitions = useTransition(cards, null, {
@@ -65,6 +73,8 @@ function Home(props: RouteComponentProps) {
     leave: { opacity: 0, transform: "rotateX(30deg)" },
     config: config.default,
   });
+
+  if (!route) return null;
 
   return (
     <>
