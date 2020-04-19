@@ -1,4 +1,9 @@
 .Image {
-  opacity: 0;
   background-color: rgba(0, 0, 0, 0.66);
+  opacity: 0;
+}
+
+.ImageElement {
+  opacity: 0;
+  width: 100%;
 }

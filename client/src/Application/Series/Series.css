@@ -1,5 +1,13 @@
-.SeriesBannerImage {
-  width: 758px;
-  height: 140px;
-  /* background-color: rgba(0, 0, 0, 0.66); */
+.Series {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 758px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.SeriesText {
+  align-self: flex-start;
 }

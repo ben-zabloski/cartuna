@@ -26,11 +26,12 @@ function ImageElement({ src }: ImageProps) {
   const spring = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
-    config: config.molasses,
+    config: config.stiff,
   });
 
   return (
     <animated.img
+      className="ImageElement"
       src={error ? undefined : src}
       onLoad={onLoadHandler}
       onError={onErrorHandler}
@@ -47,14 +48,12 @@ function Image({ src, ...props }: ImageProps) {
     config: config.molasses,
   });
 
-  console.log("img transitions:", src, transitions);
-
   return (
-    <div className="Image" {...props}>
+    <div {...props}>
       {transitions.map(
         ({ item, key, props }) =>
           item && (
-            <animated.div key={key} style={props}>
+            <animated.div className="Image" key={key} style={props}>
               <ImageElement src={src} />
             </animated.div>
           )

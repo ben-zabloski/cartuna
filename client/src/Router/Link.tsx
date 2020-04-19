@@ -12,8 +12,9 @@ function Link({ children, href, ...props }: LinkProps) {
 
   const onClickHandler = useCallback(
     (event) => {
-      console.log("OMG onClickHandler");
       event.preventDefault();
+
+      if (href === routerContext.location.pathname) return;
 
       routerContext.pushState(null, "", href);
     },

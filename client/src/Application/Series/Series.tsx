@@ -7,6 +7,7 @@ import { Series as SeriesType } from "./SeriesTypes";
 import "./Series.css";
 import BannerImage from "Application/BannerImage/BannerImage";
 import useRoute from "../../Router/useRoute";
+import RouteTransition from "Application/RouteTransition/RouteTransition";
 
 interface Params {
   seriesID: string | undefined;
@@ -29,14 +30,17 @@ function Series() {
   if (!route) return null;
 
   return loading ? null : (
-    <div>
-      <BannerImage
-        alt={data?.getSeriesByID?.seriesName}
-        className="SeriesBannerImage"
-        src={data?.getSeriesByID?.banner}
-      />
-      Series: {data?.getSeriesByID?.seriesName}
-    </div>
+    <RouteTransition path="/series/:seriesID">
+      <div className="Series">
+        <BannerImage
+          alt={data?.getSeriesByID?.seriesName}
+          src={data?.getSeriesByID?.banner}
+        />
+        <div className="SeriesText">
+          Series: {data?.getSeriesByID?.seriesName}
+        </div>
+      </div>
+    </RouteTransition>
   );
 }
 

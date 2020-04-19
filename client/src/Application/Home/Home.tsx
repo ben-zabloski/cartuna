@@ -12,6 +12,7 @@ import { SeriesSearch } from "./HomeTypes";
 import Spinner from "../Spinner/Spinner";
 import useRoute from "../../Router/useRoute";
 import "./Home.css";
+import RouteTransition from "Application/RouteTransition/RouteTransition";
 
 type DataObject = { getSeriesByName: [SeriesSearch] };
 type DataMap = Record<string, DataObject>;
@@ -74,44 +75,48 @@ function Home() {
     config: config.default,
   });
 
-  if (!route) return null;
+  // if (!route) return null;
 
   return (
-    <>
-      <div className="ApplicationHeader">
-        <img alt="Cartuna Logo" src={cartunaLogo} />
-        <div className="ApplicationInput">
-          <div className="ApplicationTitle">Cartuna</div>
-          <div className="InputContainer">
-            <div className="InputWrapper">
-              <Input
-                debounce={INPUT_DEBOUNCE}
-                defaultValue={term}
-                onChange={inputOnChangeHandler}
-              />
-            </div>
-            <div className="spinnerContainer">
-              <Spinner show={loading} />
+    <RouteTransition path="/:term">
+      <div className="Home">
+        <div className="ApplicationHeader">
+          <img alt="Cartuna Logo" src={cartunaLogo} />
+          <div className="ApplicationInput">
+            <div className="ApplicationTitle">Cartuna</div>
+            <div className="InputContainer">
+              <div className="InputWrapper">
+                <Input
+                  debounce={INPUT_DEBOUNCE}
+                  defaultValue={term}
+                  onChange={inputOnChangeHandler}
+                />
+              </div>
+              <div className="spinnerContainer">
+                <Spinner show={loading} />
+              </div>
             </div>
           </div>
         </div>
+        <div className="HomeCardList">
+          {transitions.reverse().map(({ item, key, props }) => (
+            <animated.div key={item} className="CardListTest" style={props}>
+              <CardList>
+                {queryCache &&
+                  queryCache[item] &&
+                  queryCache[item] &&
+                  queryCache[item].getSeriesByName &&
+                  queryCache[
+                    item
+                  ].getSeriesByName.map((series: SeriesSearch) => (
+                    <SeriesCard key={series.id} {...series} />
+                  ))}
+              </CardList>
+            </animated.div>
+          ))}
+        </div>
       </div>
-      <div className="HomeCardList">
-        {transitions.reverse().map(({ item, key, props }) => (
-          <animated.div key={item} className="CardListTest" style={props}>
-            <CardList>
-              {queryCache &&
-                queryCache[item] &&
-                queryCache[item] &&
-                queryCache[item].getSeriesByName &&
-                queryCache[item].getSeriesByName.map((series: SeriesSearch) => (
-                  <SeriesCard key={series.id} {...series} />
-                ))}
-            </CardList>
-          </animated.div>
-        ))}
-      </div>
-    </>
+    </RouteTransition>
   );
 }
 
