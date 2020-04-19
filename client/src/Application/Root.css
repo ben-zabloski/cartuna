@@ -1,0 +1,39 @@
+@media only screen and (min-width: 0px) {
+  :root {
+    --application-width: 240px;
+    --application-header-flex-direction: column;
+    --appliaction-header-margin: 24px 24px 0px 24px;
+    --application-input-margin: 24px 24px 12px 24px;
+    --banner-max-width: 758px;
+    --banner-height: 35px;
+    --banner-width: 240px;
+    --series-max-width: var(--banner-max-width);
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  :root {
+    --application-width: 480px;
+    --application-header-flex-direction: row;
+    --appliaction-header-margin: 24px;
+    --application-input-margin: 24px;
+    --banner-height: 70px;
+    --banner-width: 480px;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  :root {
+    --application-width: 720px;
+    --banner-height: 105px;
+    --banner-width: 720px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  :root {
+    --application-width: 960px;
+    --banner-height: 140px;
+    --banner-width: 758px;
+  }
+}

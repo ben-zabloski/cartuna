@@ -1,9 +1,15 @@
+.ImageContainer {
+  position: relative;
+}
+
 .Image {
-  background-color: rgba(0, 0, 0, 0.66);
   opacity: 0;
+  position: absolute;
+  width: 100%;
 }
 
 .ImageElement {
+  display: block;
   opacity: 0;
   width: 100%;
 }

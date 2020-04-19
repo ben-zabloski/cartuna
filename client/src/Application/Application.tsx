@@ -6,6 +6,7 @@ import React, { Suspense } from "react";
 import HomeLoader from "./Home/HomeLoader";
 import SeriesLoader from "./Series/SeriesLoader";
 import "./Application.css";
+import "./Root.css";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_DATABASE_URL,

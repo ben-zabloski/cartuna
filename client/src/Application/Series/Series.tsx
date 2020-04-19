@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { GET_SERIES_BY_ID } from "./SeriesQueries";
 import { Series as SeriesType } from "./SeriesTypes";
@@ -9,35 +9,39 @@ import BannerImage from "Application/BannerImage/BannerImage";
 import useRoute from "../../Router/useRoute";
 import RouteTransition from "Application/RouteTransition/RouteTransition";
 
-interface Params {
-  seriesID: string | undefined;
-}
-
 type DataObject = {
   getSeriesByID: SeriesType;
 };
 
 function Series() {
   const route = useRoute("/series/:seriesID");
-  console.log("Series route:", route);
+  const [seriesID, setSeriesID] = useState<string>();
+  const [seriesData, setSeriesData] = useState<DataObject>();
 
   const { data, loading } = useQuery(GET_SERIES_BY_ID, {
     variables: {
-      id: route?.params.seriesID,
+      id: seriesID,
+      skip: !route,
     },
   });
 
-  if (!route) return null;
+  useEffect(() => {
+    if (route) setSeriesID(route.params.seriesID);
+  }, [route]);
 
-  return loading ? null : (
+  useEffect(() => {
+    setSeriesData(data);
+  }, [data]);
+
+  return (
     <RouteTransition path="/series/:seriesID">
       <div className="Series">
         <BannerImage
-          alt={data?.getSeriesByID?.seriesName}
-          src={data?.getSeriesByID?.banner}
+          alt={seriesData?.getSeriesByID?.seriesName}
+          src={seriesData?.getSeriesByID?.banner}
         />
         <div className="SeriesText">
-          Series: {data?.getSeriesByID?.seriesName}
+          Series: {seriesData?.getSeriesByID?.seriesName}
         </div>
       </div>
     </RouteTransition>

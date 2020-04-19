@@ -15,7 +15,7 @@ function RouteTransition({ children, path }: RouteTransitionProps) {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: config.stiff,
+    config: config.molasses,
   });
 
   return (

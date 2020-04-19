@@ -26,7 +26,7 @@ function ImageElement({ src }: ImageProps) {
   const spring = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
-    config: config.stiff,
+    config: config.molasses,
   });
 
   return (
@@ -45,19 +45,22 @@ function Image({ src, ...props }: ImageProps) {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: config.molasses,
+    config: config.stiff,
   });
 
   return (
     <div {...props}>
-      {transitions.map(
-        ({ item, key, props }) =>
-          item && (
-            <animated.div className="Image" key={key} style={props}>
+      <div className="ImageContainer">
+        {transitions.map(
+          ({ item, key, props }) => (
+            // item && (
+            <animated.div key={key} className="Image" style={props}>
               <ImageElement src={src} />
             </animated.div>
           )
-      )}
+          // )
+        )}
+      </div>
     </div>
   );
 }

@@ -1,4 +1,6 @@
 .BannerImage {
-  max-width: 758px;
-  max-height: 140px;
+  background-color: rgba(0, 0, 0, 0.66);
+  height: var(--banner-height);
+  max-width: var(--banner-max-width);
+  width: var(--banner-width);
 }

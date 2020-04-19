@@ -23,13 +23,10 @@ const queryCache: DataMap = {};
 
 function Home() {
   const apolloClient = useApolloClient();
-  console.log("apolloClient:", apolloClient);
 
   const mounted = useRef(false);
   const route = useRoute("/:term");
   const term = route?.params.term || "";
-
-  console.log("Home route:", route);
 
   const [input, setInput] = useState("");
   const inputOnChangeHandler = useCallback((value) => {
@@ -47,10 +44,6 @@ function Home() {
       mounted.current = true;
       return;
     }
-    // if (match?.path === `/${input}`) return;
-
-    console.log("navigate:", input);
-
     route?.pushState(null, "", `/${input}`);
 
     //TODO: Figure out if we can improve our hooks usage...

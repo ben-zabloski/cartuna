@@ -3,7 +3,7 @@ import Image from "../Image/Image";
 import "./BannerImage.css";
 
 interface BannerImageProps extends React.AllHTMLAttributes<HTMLElement> {
-  src: string;
+  src: string | undefined;
 }
 
 function BannerImage({ src, ...props }: BannerImageProps) {

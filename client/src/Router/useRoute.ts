@@ -2,32 +2,33 @@ import { RouterContext, RouterContextInterface } from "./Router";
 import { useContext, useEffect, useState } from "react";
 
 type Params = Record<string, string>;
+
 interface Route extends RouterContextInterface {
   params: Params;
 }
 
-function useRoute(route: string): Route | null {
+function useRoute(path: string): Route | null {
   const routerContext = useContext(RouterContext);
-  const [params, setParams] = useState<Params>();
+  const [route, setRoute] = useState<Route>();
 
   useEffect(() => {
-    const paramNames: Array<string> = route
+    const paramNames: Array<string> = path
       .split("/")
       .map((name) => (name.startsWith(":") ? name.slice(1) : name));
 
     if (!paramNames) {
-      setParams(undefined);
+      setRoute(undefined);
       return;
     }
 
     const paramValues = routerContext.location.pathname.split("/");
     if (!paramValues) {
-      setParams(undefined);
+      setRoute(undefined);
       return;
     }
 
     if (paramNames.length !== paramValues.length) {
-      setParams(undefined);
+      setRoute(undefined);
       return;
     }
 
@@ -37,16 +38,14 @@ function useRoute(route: string): Route | null {
       params[paramNames[i]] = paramValues[i];
     }
 
-    setParams(params);
-  }, [route, routerContext]);
+    setRoute({
+      location: routerContext.location,
+      params,
+      pushState: routerContext.pushState,
+    });
+  }, [path, routerContext]);
 
-  if (!params) return null;
-
-  return {
-    location: routerContext.location,
-    params,
-    pushState: routerContext.pushState,
-  };
+  return route ? route : null;
 }
 
 export default useRoute;
