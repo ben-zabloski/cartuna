@@ -1,7 +1,7 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import "./Image.css";
-import { useTransition, config, animated, useSpring } from "react-spring";
+import { useTransition, animated, useSpring } from "react-spring";
 
 interface ImageProps {
   src: string | undefined;
@@ -11,22 +11,16 @@ function ImageElement({ src }: ImageProps) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
-  const onLoadHandler = useCallback((event) => {
+  const onLoadHandler = useCallback(() => {
     setLoaded(true);
   }, []);
 
-  const onErrorHandler = useCallback((event) => {
+  const onErrorHandler = useCallback(() => {
     setError(true);
   }, []);
 
-  useEffect(() => {
-    setLoaded(false);
-  }, [src]);
-
   const spring = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    config: config.molasses,
+    to: { opacity: loaded ? 1 : 0 },
   });
 
   return (
@@ -42,23 +36,20 @@ function ImageElement({ src }: ImageProps) {
 
 function Image({ src, ...props }: ImageProps) {
   const transitions = useTransition(src, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
+    from: { opacity: 1 },
     leave: { opacity: 0 },
-    config: config.stiff,
   });
 
   return (
     <div {...props}>
       <div className="ImageContainer">
         {transitions.map(
-          ({ item, key, props }) => (
-            // item && (
-            <animated.div key={key} className="Image" style={props}>
-              <ImageElement src={src} />
-            </animated.div>
-          )
-          // )
+          ({ item, key, props }) =>
+            item && (
+              <animated.div key={key} className="Image" style={props}>
+                <ImageElement src={item} />
+              </animated.div>
+            )
         )}
       </div>
     </div>

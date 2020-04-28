@@ -6,6 +6,7 @@ export const GET_SERIES_BY_ID = gql`
       banner
       id
       seriesName
+      overview
     }
   }
 `;

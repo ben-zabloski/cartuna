@@ -1,10 +1,11 @@
 import React from "react";
 import { animated, config, useTransition } from "react-spring";
 
-import useRoute from "../../Router/useRoute";
+import useRoute, { Route } from "../../Router/useRoute";
 import "./RouteTransition.css";
 
-interface RouteTransitionProps extends React.AllHTMLAttributes<HTMLElement> {
+interface RouteTransitionProps {
+  children: (value: any) => React.ReactNode;
   path: string;
 }
 
@@ -15,7 +16,6 @@ function RouteTransition({ children, path }: RouteTransitionProps) {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    config: config.molasses,
   });
 
   return (
@@ -23,8 +23,8 @@ function RouteTransition({ children, path }: RouteTransitionProps) {
       {transitions.map(
         ({ item, key, props }) =>
           item && (
-            <animated.div className="RouteTransition" key={key} style={props}>
-              {children}
+            <animated.div key={key} className="RouteTransition" style={props}>
+              {children(item)}
             </animated.div>
           )
       )}

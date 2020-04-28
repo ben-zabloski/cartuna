@@ -1,15 +1,18 @@
 .ImageContainer {
+  height: inherit;
   position: relative;
+  width: inherit;
 }
 
 .Image {
-  opacity: 0;
+  height: inherit;
   position: absolute;
-  width: 100%;
+  width: inherit;
 }
 
 .ImageElement {
   display: block;
-  opacity: 0;
-  width: 100%;
+  height: inherit;
+  object-fit: contain;
+  width: inherit;
 }

@@ -10,4 +10,7 @@
 
 .SeriesText {
   align-self: flex-start;
+  background-color: rgba(0, 0, 0, 0.16);
+  flex-grow: 1;
+  padding: 16px;
 }

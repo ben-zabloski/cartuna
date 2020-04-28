@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 
 type Params = Record<string, string>;
 
-interface Route extends RouterContextInterface {
+export interface Route extends RouterContextInterface {
   params: Params;
 }
 

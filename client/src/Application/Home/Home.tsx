@@ -72,43 +72,47 @@ function Home() {
 
   return (
     <RouteTransition path="/:term">
-      <div className="Home">
-        <div className="ApplicationHeader">
-          <img alt="Cartuna Logo" src={cartunaLogo} />
-          <div className="ApplicationInput">
-            <div className="ApplicationTitle">Cartuna</div>
-            <div className="InputContainer">
-              <div className="InputWrapper">
-                <Input
-                  debounce={INPUT_DEBOUNCE}
-                  defaultValue={term}
-                  onChange={inputOnChangeHandler}
-                />
-              </div>
-              <div className="spinnerContainer">
-                <Spinner show={loading} />
+      {(route) => {
+        return (
+          <div className="Home">
+            <div className="ApplicationHeader">
+              <img alt="Cartuna Logo" src={cartunaLogo} />
+              <div className="ApplicationInput">
+                <div className="ApplicationTitle">Cartuna</div>
+                <div className="InputContainer">
+                  <div className="InputWrapper">
+                    <Input
+                      debounce={INPUT_DEBOUNCE}
+                      defaultValue={term}
+                      onChange={inputOnChangeHandler}
+                    />
+                  </div>
+                  <div className="spinnerContainer">
+                    <Spinner show={loading} />
+                  </div>
+                </div>
               </div>
             </div>
+            <div className="HomeCardList">
+              {transitions.reverse().map(({ item, key, props }) => (
+                <animated.div key={key} className="CardListTest" style={props}>
+                  <CardList>
+                    {queryCache &&
+                      queryCache[item] &&
+                      queryCache[item] &&
+                      queryCache[item].getSeriesByName &&
+                      queryCache[
+                        item
+                      ].getSeriesByName.map((series: SeriesSearch) => (
+                        <SeriesCard key={series.id} {...series} />
+                      ))}
+                  </CardList>
+                </animated.div>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="HomeCardList">
-          {transitions.reverse().map(({ item, key, props }) => (
-            <animated.div key={item} className="CardListTest" style={props}>
-              <CardList>
-                {queryCache &&
-                  queryCache[item] &&
-                  queryCache[item] &&
-                  queryCache[item].getSeriesByName &&
-                  queryCache[
-                    item
-                  ].getSeriesByName.map((series: SeriesSearch) => (
-                    <SeriesCard key={series.id} {...series} />
-                  ))}
-              </CardList>
-            </animated.div>
-          ))}
-        </div>
-      </div>
+        );
+      }}
     </RouteTransition>
   );
 }
